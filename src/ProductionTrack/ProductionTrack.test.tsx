@@ -2,7 +2,15 @@ import React from 'react';
 import {render} from '@testing-library/react-native';
 import {ProductionTrack} from './ProductionTrack';
 
-it('should render without error', () => {
-  const {getByText} = render(<ProductionTrack />);
-  expect(getByText('Production track')).toBeDefined();
+describe('ProductionTrack', () => {
+  it('should show current value of production', () => {
+    const {getByText} = render(
+      <ProductionTrack
+        handleOnDecrement={jest.fn()}
+        handleOnIncrement={jest.fn()}
+        value={0}
+      />,
+    );
+    expect(getByText('0')).toBeDefined();
+  });
 });
