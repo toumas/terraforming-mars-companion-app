@@ -13,4 +13,24 @@ describe('ProductionTrack', () => {
     );
     expect(getByText('0')).toBeDefined();
   });
+  it('should render decrement button', () => {
+    const {getByText} = render(
+      <ProductionTrack
+        handleOnDecrement={jest.fn()}
+        handleOnIncrement={jest.fn()}
+        value={0}
+      />,
+    );
+    expect(getByText('-')).toBeDefined();
+  });
+  it('should render increment button', () => {
+    const {getByText} = render(
+      <ProductionTrack
+        handleOnDecrement={jest.fn()}
+        handleOnIncrement={jest.fn()}
+        value={0}
+      />,
+    );
+    expect(getByText('+')).toBeDefined();
+  });
 });
