@@ -1,9 +1,10 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import {Dispatch} from '@reduxjs/toolkit';
+import {Text} from 'react-native';
 import {actions} from './section';
 import {ProductionTrack} from './ProductionTrack/ProductionTrack';
 import {RootState} from './store';
-import {Dispatch} from '@reduxjs/toolkit';
 
 interface SectionProps {
   name: string;
@@ -26,6 +27,7 @@ export function Section({name}: SectionProps) {
 
   return (
     <>
+      <Text>{name}</Text>
       <ProductionTrack
         handleOnDecrement={handleDecrement}
         handleOnIncrement={handleIncrement}
