@@ -1,8 +1,14 @@
 import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
-import {production} from './reducers';
+import {reducers, Section} from './section';
 
-const store: EnhancedStore = configureStore({
-  reducer: production.reducer,
+export type RootState = {
+  [key: string]: Section;
+};
+
+const store: EnhancedStore<RootState> = configureStore({
+  reducer: {
+    ...reducers,
+  },
 });
 
 export {store};
