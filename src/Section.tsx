@@ -1,28 +1,35 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {production} from './reducers';
+import {actions} from './section';
 import {ProductionTrack} from './ProductionTrack/ProductionTrack';
+import {RootState} from './store';
+import {Dispatch} from '@reduxjs/toolkit';
 
-export default function Section() {
-  const dispatch = useDispatch();
-  const value = useSelector((state) => {
-    return state as number;
+interface SectionProps {
+  name: string;
+}
+
+export function Section({name}: SectionProps) {
+  const dispatch: Dispatch = useDispatch();
+  const {decrementProduction, incrementProduction} = actions[name];
+  const {production} = useSelector((state: RootState) => {
+    return state[name];
   });
 
-  function decrement() {
-    dispatch(production.actions.decrement({}));
+  function handleDecrement() {
+    dispatch(decrementProduction());
   }
 
-  function increment() {
-    dispatch(production.actions.increment({}));
+  function handleIncrement() {
+    dispatch(incrementProduction());
   }
 
   return (
     <>
       <ProductionTrack
-        handleOnDecrement={decrement}
-        handleOnIncrement={increment}
-        value={value}
+        handleOnDecrement={handleDecrement}
+        handleOnIncrement={handleIncrement}
+        value={production}
       />
     </>
   );
