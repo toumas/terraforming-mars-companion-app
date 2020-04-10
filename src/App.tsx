@@ -2,7 +2,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {store} from './store';
 import {Section} from './Section';
-import {SectionNames} from './section';
+import { SectionNames } from './SectionNames';
 
 const App = () => {
   return (

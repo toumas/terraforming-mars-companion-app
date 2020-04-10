@@ -1,3 +1,4 @@
+import { SectionNames } from './SectionNames';
 import {
   createSlice,
   Reducer,
@@ -6,14 +7,6 @@ import {
 
 export interface Section {
   production: number;
-}
-
-export enum SectionNames {
-  ENERGY = 'energy',
-  HEAT = 'heat',
-  PLANTS = 'plants',
-  STEEL = 'steel',
-  TITANIUM = 'titanium',
 }
 
 interface ActionsBySectionName {
