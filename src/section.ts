@@ -20,14 +20,18 @@ interface ActionsBySectionName {
   [key: string]: ActionCreatorWithoutPayload<string>;
 }
 
-export const initialState = {
+export const initialSectionState = {
   production: 0,
 };
 
-export const makeSlice = (name: string) => {
+export const makeSlice = (
+  name: string,
+  initialState: Section = initialSectionState,
+  reducers = {},
+) => {
   return createSlice({
-    name: name,
-    initialState: initialState,
+    name,
+    initialState,
     reducers: {
       decrementProduction: (state: Section) => {
         if (state.production > 0) {
@@ -37,6 +41,7 @@ export const makeSlice = (name: string) => {
       incrementProduction: (state: Section) => {
         state.production = state.production + 1;
       },
+      ...reducers,
     },
   });
 };
