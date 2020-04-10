@@ -1,5 +1,6 @@
 import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
 import {reducers, Section} from './section';
+import {reducer as megaCreditsReducer} from './megaCredits';
 
 export type RootState = {
   [key: string]: Section;
@@ -8,6 +9,7 @@ export type RootState = {
 const store: EnhancedStore<RootState> = configureStore({
   reducer: {
     ...reducers,
+    ...megaCreditsReducer,
   },
 });
 
