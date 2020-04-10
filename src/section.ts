@@ -1,4 +1,4 @@
-import { SectionNames } from './SectionNames';
+import {SectionNames} from './SectionNames';
 import {
   createSlice,
   Reducer,
@@ -9,7 +9,7 @@ export interface Section {
   production: number;
 }
 
-interface ActionsBySectionName {
+export interface ActionsBySectionName {
   [key: string]: ActionCreatorWithoutPayload<string>;
 }
 

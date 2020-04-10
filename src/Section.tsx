@@ -2,13 +2,23 @@ import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Dispatch} from '@reduxjs/toolkit';
 import {Text} from 'react-native';
-import {actions} from './section';
+import {
+  actions as sectionActions,
+  ActionsBySectionName,
+} from './section';
 import {ProductionTrack} from './ProductionTrack/ProductionTrack';
 import {RootState} from './store';
+import {actions as megaCreditsActions} from './megaCredits';
+import { SectionNames } from './SectionNames';
 
 interface SectionProps {
   name: string;
 }
+
+const actions: {[x: string]: ActionsBySectionName} = {
+  ...sectionActions,
+  [SectionNames.MEGA_CREDITS]: {...megaCreditsActions},
+};
 
 export function Section({name}: SectionProps) {
   const dispatch: Dispatch = useDispatch();
