@@ -7,6 +7,7 @@ import {
 
 export interface Section {
   production: number;
+  resources: number;
 }
 
 export interface ActionsBySectionName {
@@ -15,6 +16,7 @@ export interface ActionsBySectionName {
 
 export const initialSectionState = {
   production: 0,
+  resources: 0,
 };
 
 export const makeSlice = (
@@ -33,6 +35,14 @@ export const makeSlice = (
       },
       incrementProduction: (state: Section) => {
         state.production = state.production + 1;
+      },
+      decrementResources: (state: Section) => {
+        if (state.resources > 0) {
+          state.resources = state.resources - 1;
+        }
+      },
+      incrementResources: (state: Section) => {
+        state.resources = state.resources + 1;
       },
       ...reducers,
     },
