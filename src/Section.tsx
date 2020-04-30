@@ -3,11 +3,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Dispatch} from '@reduxjs/toolkit';
 import {Text} from 'react-native';
 import {actions as sectionActions, ActionsBySectionName} from './section';
-import {ProductionTrack} from './ProductionTrack/ProductionTrack';
 import {RootState} from './store';
 import {actions as megaCreditsActions} from './megaCredits';
 import {SectionNames} from './SectionNames';
-import {OperationsInput} from './OperationsInput';
+import {OperationsInput} from './OperationsInput/OperationsInput';
 
 interface SectionProps {
   name: string;
@@ -54,7 +53,7 @@ export function Section({name}: SectionProps) {
         handleOnIncrement={handleResourcesIncrement}
         value={resources}
       />
-      <ProductionTrack
+      <OperationsInput
         handleOnDecrement={handleProductionDecrement}
         handleOnIncrement={handleProductionIncrement}
         value={production}

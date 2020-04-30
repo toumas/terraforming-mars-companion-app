@@ -1,11 +1,11 @@
 import React from 'react';
 import {render} from '@testing-library/react-native';
-import {ProductionTrack} from './ProductionTrack';
+import {OperationsInput} from './OperationsInput';
 
-describe('ProductionTrack', () => {
+describe('OperationsInput', () => {
   it('should show current value of production', () => {
     const {getByText} = render(
-      <ProductionTrack
+      <OperationsInput
         handleOnDecrement={jest.fn()}
         handleOnIncrement={jest.fn()}
         value={0}
@@ -15,7 +15,7 @@ describe('ProductionTrack', () => {
   });
   it('should render decrement button', () => {
     const {getByText} = render(
-      <ProductionTrack
+      <OperationsInput
         handleOnDecrement={jest.fn()}
         handleOnIncrement={jest.fn()}
         value={0}
@@ -25,7 +25,7 @@ describe('ProductionTrack', () => {
   });
   it('should render increment button', () => {
     const {getByText} = render(
-      <ProductionTrack
+      <OperationsInput
         handleOnDecrement={jest.fn()}
         handleOnIncrement={jest.fn()}
         value={0}
