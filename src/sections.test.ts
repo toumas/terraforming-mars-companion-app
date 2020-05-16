@@ -3,7 +3,7 @@ import {slice as generationSlice} from './generation';
 
 describe('section reducer', () => {
   it('should increment production', () => {
-    const plantsSlice = makeSlice('plants');
+    const plantsSlice = makeSlice({name: 'plants'});
     const nextState = plantsSlice.reducer(
       {
         production: 0,
@@ -17,7 +17,7 @@ describe('section reducer', () => {
     });
   });
   it('should decrement production', () => {
-    const plantsSlice = makeSlice('plants');
+    const plantsSlice = makeSlice({name: 'plants'});
     const nextState = plantsSlice.reducer(
       {
         production: 1,
@@ -31,7 +31,7 @@ describe('section reducer', () => {
     });
   });
   it('should not decrement production below zero', () => {
-    const plantsSlice = makeSlice('plants');
+    const plantsSlice = makeSlice({name: 'plants'});
     const nextState = plantsSlice.reducer(
       {
         production: 0,
@@ -45,7 +45,7 @@ describe('section reducer', () => {
     });
   });
   it('should decrement resources', () => {
-    const plantsSlice = makeSlice('plants');
+    const plantsSlice = makeSlice({name: 'plants'});
     const nextState = plantsSlice.reducer(
       {
         production: 0,
@@ -59,7 +59,7 @@ describe('section reducer', () => {
     });
   });
   it('should not decrement resources below zero', () => {
-    const plantsSlice = makeSlice('plants');
+    const plantsSlice = makeSlice({name: 'plants'});
     const nextState = plantsSlice.reducer(
       {
         production: 0,
@@ -73,7 +73,7 @@ describe('section reducer', () => {
     });
   });
   it('should produce resources based on production count', () => {
-    const plantsSlice = makeSlice('plants');
+    const plantsSlice = makeSlice({name: 'plants'});
     const nextState = plantsSlice.reducer(
       {
         production: 1,

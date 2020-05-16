@@ -3,6 +3,7 @@ import {
   createSlice,
   Reducer,
   ActionCreatorWithoutPayload,
+  ReducersMapObject,
 } from '@reduxjs/toolkit';
 import {slice as generationSlice} from './generation';
 
@@ -15,16 +16,25 @@ export interface ActionsBySectionName {
   [key: string]: ActionCreatorWithoutPayload<string>;
 }
 
+interface MakeSliceOptions {
+  name: string;
+  initialState?: Section;
+  reducers?: ReducersMapObject;
+  extraReducers?: ReducersMapObject;
+}
+
 export const initialSectionState = {
   production: 0,
   resources: 0,
 };
 
-export const makeSlice = (
-  name: string,
-  initialState: Section = initialSectionState,
-  reducers = {},
-) => {
+export const makeSlice = (options: MakeSliceOptions) => {
+  const {
+    name,
+    initialState = initialSectionState,
+    reducers,
+    extraReducers,
+  } = options;
   return createSlice({
     name,
     initialState,
@@ -53,15 +63,16 @@ export const makeSlice = (
       ) => {
         state.resources = state.resources + state.production;
       },
+      ...extraReducers,
     },
   });
 };
 
-const energySlice = makeSlice(SectionNames.ENERGY);
-const heatSlice = makeSlice(SectionNames.HEAT);
-const plantsSlice = makeSlice(SectionNames.PLANTS);
-const steelSlice = makeSlice(SectionNames.STEEL);
-const titaniumSlice = makeSlice(SectionNames.TITANIUM);
+const energySlice = makeSlice({name: SectionNames.ENERGY});
+const heatSlice = makeSlice({name: SectionNames.HEAT});
+const plantsSlice = makeSlice({name: SectionNames.PLANTS});
+const steelSlice = makeSlice({name: SectionNames.STEEL});
+const titaniumSlice = makeSlice({name: SectionNames.TITANIUM});
 
 export const reducers: {[key: string]: Reducer<Section>} = {
   [SectionNames.ENERGY]: energySlice.reducer,
