@@ -1,9 +1,10 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {FloatingAction} from 'react-native-floating-action';
 import {Section} from './Section';
 import {SectionNames} from './SectionNames';
-import {slice as generationSlice} from './generation';
+import {incrementGeneration} from './generation';
+import {selectEnergyResources} from './section';
 
 const actions = [
   {
@@ -14,9 +15,10 @@ const actions = [
 
 export const PlayerBoard = () => {
   const dispatch = useDispatch();
+  const energyResources = useSelector(selectEnergyResources);
 
   function handleFABPress(): void {
-    dispatch(generationSlice.actions.incrementGeneration());
+    dispatch(incrementGeneration(energyResources));
   }
 
   return (

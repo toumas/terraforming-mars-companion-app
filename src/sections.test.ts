@@ -1,5 +1,5 @@
-import {makeSlice} from './section';
-import {slice as generationSlice} from './generation';
+import {makeSlice, energySlice, heatSlice} from './section';
+import {incrementGeneration} from './generation';
 
 describe('section reducer', () => {
   it('should increment production', () => {
@@ -79,10 +79,40 @@ describe('section reducer', () => {
         production: 1,
         resources: 0,
       },
-      generationSlice.actions.incrementGeneration(),
+      incrementGeneration(0),
     );
     expect(nextState).toEqual({
       production: 1,
+      resources: 1,
+    });
+  });
+  it('should set energy resources equal to pro', () => {
+    const state = {
+      production: 1,
+      resources: 2,
+    };
+    const nextState = energySlice.reducer(
+      state,
+      incrementGeneration(state.resources),
+    );
+    expect(nextState).toEqual({
+      production: 1,
+      resources: 1,
+    });
+  });
+  it('should set heat resources equal to energy resources', () => {
+    const energySlice = makeSlice({
+      name: 'energy',
+      initialState: {production: 0, resources: 1},
+    });
+    const energyResources = energySlice.reducer(undefined, {type: 'init'})
+      .resources;
+    const nextState = heatSlice.reducer(
+      {production: 0, resources: 0},
+      incrementGeneration(energyResources),
+    );
+    expect(nextState).toEqual({
+      production: 0,
       resources: 1,
     });
   });

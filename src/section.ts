@@ -4,8 +4,11 @@ import {
   Reducer,
   ActionCreatorWithoutPayload,
   ReducersMapObject,
+  createSelector,
+  PayloadAction,
 } from '@reduxjs/toolkit';
-import {slice as generationSlice} from './generation';
+import {incrementGeneration} from './generation';
+import {RootState} from './store';
 
 export interface Section {
   production: number;
@@ -20,7 +23,7 @@ interface MakeSliceOptions {
   name: string;
   initialState?: Section;
   reducers?: ReducersMapObject;
-  extraReducers?: ReducersMapObject;
+  extraReducers?: ReducersMapObject<any, PayloadAction<number>>;
 }
 
 export const initialSectionState = {
@@ -58,9 +61,7 @@ export const makeSlice = (options: MakeSliceOptions) => {
       ...reducers,
     },
     extraReducers: {
-      [generationSlice.actions.incrementGeneration.toString()]: (
-        state: Section,
-      ) => {
+      [incrementGeneration.type]: (state: Section) => {
         state.resources = state.resources + state.production;
       },
       ...extraReducers,
@@ -68,8 +69,25 @@ export const makeSlice = (options: MakeSliceOptions) => {
   });
 };
 
-const energySlice = makeSlice({name: SectionNames.ENERGY});
-const heatSlice = makeSlice({name: SectionNames.HEAT});
+export const energySlice = makeSlice({
+  name: SectionNames.ENERGY,
+  extraReducers: {
+    [incrementGeneration.type]: (state: Section) => {
+      state.resources = state.production;
+    },
+  },
+});
+export const heatSlice = makeSlice({
+  name: SectionNames.HEAT,
+  extraReducers: {
+    [incrementGeneration.type]: (
+      state: Section,
+      action: PayloadAction<number>,
+    ) => {
+      state.resources = state.resources + state.production + action.payload;
+    },
+  },
+});
 const plantsSlice = makeSlice({name: SectionNames.PLANTS});
 const steelSlice = makeSlice({name: SectionNames.STEEL});
 const titaniumSlice = makeSlice({name: SectionNames.TITANIUM});
@@ -89,3 +107,10 @@ export const actions: {[x: string]: ActionsBySectionName} = {
   [SectionNames.STEEL]: {...steelSlice.actions},
   [SectionNames.TITANIUM]: {...titaniumSlice.actions},
 };
+
+export const selectEnergyResources = createSelector(
+  (state: RootState) => {
+    return state.energy.resources;
+  },
+  (heatResources) => heatResources,
+);
