@@ -1,4 +1,5 @@
 import {makeSlice} from './section';
+import {slice as generationSlice} from './generation';
 
 describe('section reducer', () => {
   it('should increment production', () => {
@@ -69,6 +70,20 @@ describe('section reducer', () => {
     expect(nextState).toEqual({
       production: 0,
       resources: 0,
+    });
+  });
+  it('should produce resources based on production count', () => {
+    const plantsSlice = makeSlice('plants');
+    const nextState = plantsSlice.reducer(
+      {
+        production: 1,
+        resources: 0,
+      },
+      generationSlice.actions.incrementGeneration(),
+    );
+    expect(nextState).toEqual({
+      production: 1,
+      resources: 1,
     });
   });
 });

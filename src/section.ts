@@ -4,6 +4,7 @@ import {
   Reducer,
   ActionCreatorWithoutPayload,
 } from '@reduxjs/toolkit';
+import {slice as generationSlice} from './generation';
 
 export interface Section {
   production: number;
@@ -45,6 +46,13 @@ export const makeSlice = (
         state.resources = state.resources + 1;
       },
       ...reducers,
+    },
+    extraReducers: {
+      [generationSlice.actions.incrementGeneration.toString()]: (
+        state: Section,
+      ) => {
+        state.resources = state.resources + state.production;
+      },
     },
   });
 };
