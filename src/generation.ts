@@ -1,4 +1,5 @@
-import {createSlice, createAction} from '@reduxjs/toolkit';
+import {createSlice, createAction, createSelector} from '@reduxjs/toolkit';
+import {RootState} from './store';
 
 export const incrementGeneration = createAction<number>('incrementGeneration');
 
@@ -18,3 +19,8 @@ export const slice = createSlice({
 });
 
 export const {reducer} = slice;
+
+export const selectGeneration = createSelector(
+  (state: RootState) => state.generation,
+  (generation) => generation,
+);
