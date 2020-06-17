@@ -86,7 +86,7 @@ describe('section reducer', () => {
       resources: 1,
     });
   });
-  it('should set energy resources equal to pro', () => {
+  it('should set energy resources equal to production', () => {
     const state = {
       production: 1,
       resources: 2,
