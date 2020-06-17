@@ -1,4 +1,5 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, createSelector} from '@reduxjs/toolkit';
+import {RootState} from './store';
 
 export const slice = createSlice({
   name: 'terraformRating',
@@ -12,3 +13,8 @@ export const slice = createSlice({
 
 export const {reducer} = slice;
 export const {incrementTerraformRating} = slice.actions;
+
+export const selectTerraformRating = createSelector(
+  (state: RootState) => state.terraformRating,
+  (terraformRating) => terraformRating,
+);
