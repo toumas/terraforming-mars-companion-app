@@ -5,7 +5,8 @@ export const incrementGeneration = createAction<number>('incrementGeneration');
 export const slice = createSlice({
   name: 'generation',
   initialState: 1,
-  reducers: {
+  reducers: {},
+  extraReducers: {
     [incrementGeneration.type]: (state: number) => {
       if (state < 100) {
         return state + 1;
