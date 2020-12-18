@@ -13,6 +13,7 @@ import {
 
 import Globe from './globe.svg';
 import UserPlus from './user-plus.svg';
+import {name as megaCreditsAndTerraformRating} from './megaCreditsAndTerraformRating';
 
 export const PlayerBoard = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ export const PlayerBoard = () => {
         <Text>Generation: {generation}</Text>
         <Text>Terraform rating: {terraformRating}</Text>
       </View>
-      <Section name={SectionNames.MEGA_CREDITS} />
+      <Section name={megaCreditsAndTerraformRating} />
       <Section name={SectionNames.STEEL} />
       <Section name={SectionNames.TITANIUM} />
       <Section name={SectionNames.PLANTS} />

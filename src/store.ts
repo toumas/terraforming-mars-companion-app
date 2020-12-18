@@ -1,19 +1,21 @@
 import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
 import {reducers, Section} from './section';
-import {reducer as megaCreditsReducer} from './megaCredits';
 import {reducer as generationReducer} from './generation';
-import {reducer as terraformRatingReducer} from './terraformRating';
+import {
+  MegaCreditsAndTerraformRatingState,
+  name as megaCreditsAndTerraformRating,
+  reducer as megaCreditsAndTerraformRatingReducer,
+} from './megaCreditsAndTerraformRating';
 
 export type RootState = {
-  [key: string]: Section;
+  [key: string]: Section | MegaCreditsAndTerraformRatingState;
 };
 
 const store: EnhancedStore<RootState> = configureStore({
   reducer: {
     ...reducers,
-    ...megaCreditsReducer,
     generation: generationReducer,
-    terraformRating: terraformRatingReducer,
+    [megaCreditsAndTerraformRating]: megaCreditsAndTerraformRatingReducer,
   },
 });
 

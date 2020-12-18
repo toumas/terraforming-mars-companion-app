@@ -5,8 +5,8 @@ import {Text} from 'react-native';
 import {actions as sectionActions, ActionsBySectionName} from './section';
 import {RootState} from './store';
 import {actions as megaCreditsActions} from './megaCredits';
-import {SectionNames} from './SectionNames';
 import {OperationsInput} from './OperationsInput/OperationsInput';
+import {name as MegaCreditsAndTerraformRating} from './megaCreditsAndTerraformRating';
 
 interface SectionProps {
   name: string;
@@ -14,7 +14,7 @@ interface SectionProps {
 
 const actions: {[x: string]: ActionsBySectionName} = {
   ...sectionActions,
-  [SectionNames.MEGA_CREDITS]: {...megaCreditsActions},
+  [MegaCreditsAndTerraformRating]: {...megaCreditsActions},
 };
 
 export function Section({name}: SectionProps) {

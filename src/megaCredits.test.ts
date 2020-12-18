@@ -1,18 +1,19 @@
 import {megaCreditsSlice} from './megaCredits';
+import {initialState} from './megaCreditsAndTerraformRating';
 
 describe('megaCredits reducer', () => {
   it('should decrement production', () => {
     const nextState = megaCreditsSlice.reducer(
-      {production: 0, resources: 0},
-      megaCreditsSlice.actions.decrementProduction,
+      initialState,
+      megaCreditsSlice.actions.decrementProduction(),
     );
-    expect(nextState).toEqual({production: -1, resources: 0});
+    expect(nextState).toEqual({...initialState, production: -1});
   });
   it('should not decrement production below -5', () => {
     const nextState = megaCreditsSlice.reducer(
-      {production: -5, resources: 0},
-      megaCreditsSlice.actions.decrementProduction,
+      {...initialState, production: -5},
+      megaCreditsSlice.actions.decrementProduction(),
     );
-    expect(nextState).toEqual({production: -5, resources: 0});
+    expect(nextState).toEqual({...initialState, production: -5});
   });
 });

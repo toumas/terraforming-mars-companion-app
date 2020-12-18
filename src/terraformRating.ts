@@ -1,12 +1,17 @@
 import {createSlice, createSelector} from '@reduxjs/toolkit';
+import {
+  MegaCreditsAndTerraformRatingState,
+  initialState as megaCreditsAndTerraformRatingInitialState,
+  name as megaCreditsAndTerraformRating,
+} from './megaCreditsAndTerraformRating';
 import {RootState} from './store';
 
 export const slice = createSlice({
   name: 'terraformRating',
-  initialState: 20,
+  initialState: megaCreditsAndTerraformRatingInitialState,
   reducers: {
-    incrementTerraformRating(state: number) {
-      return state + 1;
+    incrementTerraformRating(state: MegaCreditsAndTerraformRatingState) {
+      state.terraformRating = state.terraformRating + 1;
     },
   },
 });
@@ -15,6 +20,11 @@ export const {reducer} = slice;
 export const {incrementTerraformRating} = slice.actions;
 
 export const selectTerraformRating = createSelector(
-  (state: RootState) => state.terraformRating,
+  (state: RootState) => {
+    const megaCreditsAndTerraformRatingState = state[
+      megaCreditsAndTerraformRating
+    ] as MegaCreditsAndTerraformRatingState;
+    return megaCreditsAndTerraformRatingState.terraformRating;
+  },
   (terraformRating) => terraformRating,
 );
