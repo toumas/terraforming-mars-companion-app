@@ -1,4 +1,5 @@
-import {incrementGeneration} from './generation';
+import {PayloadAction} from '@reduxjs/toolkit';
+import {incrementGeneration, IncrementGenerationPayload} from './generation';
 import {
   initialState as megaCreditsAndTerraformRatingInitialState,
   MegaCreditsAndTerraformRatingState,
@@ -17,9 +18,15 @@ export const megaCreditsSlice = makeSlice({
     },
   },
   extraReducers: {
-    [incrementGeneration.type]: (state: MegaCreditsAndTerraformRatingState) => {
-      state.resources =
-        state.resources + state.production + state.terraformRating;
+    [incrementGeneration.type]: (
+      state: MegaCreditsAndTerraformRatingState,
+      action: PayloadAction<IncrementGenerationPayload>,
+    ) => {
+      if (action.payload.generation < 100) {
+        state.resources =
+          state.resources + state.production + state.terraformRating;
+      }
+      return state;
     },
   },
 });

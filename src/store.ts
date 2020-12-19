@@ -1,4 +1,4 @@
-import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import {reducers, Section} from './section';
 import {reducer as generationReducer} from './generation';
 import {
@@ -8,10 +8,11 @@ import {
 } from './megaCreditsAndTerraformRating';
 
 export type RootState = {
-  [key: string]: Section | MegaCreditsAndTerraformRatingState;
-};
+  generation: number;
+  megaCreditsAndTerraformRating: MegaCreditsAndTerraformRatingState | undefined;
+} & {[key: string]: Section};
 
-const store: EnhancedStore<RootState> = configureStore({
+const store = configureStore({
   reducer: {
     ...reducers,
     generation: generationReducer,

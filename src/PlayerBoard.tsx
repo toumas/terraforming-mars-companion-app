@@ -22,7 +22,7 @@ export const PlayerBoard = () => {
   const terraformRating = useSelector(selectTerraformRating);
 
   function handleIncrementGeneration(): void {
-    dispatch(incrementGeneration(energyResources));
+    dispatch(incrementGeneration({energyResources, generation}));
   }
 
   function handleIncrementTerraformRating(): void {

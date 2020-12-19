@@ -1,7 +1,14 @@
 import {createSlice, createAction, createSelector} from '@reduxjs/toolkit';
 import {RootState} from './store';
 
-export const incrementGeneration = createAction<number>('incrementGeneration');
+export interface IncrementGenerationPayload {
+  energyResources: number;
+  generation: number;
+}
+
+export const incrementGeneration = createAction<IncrementGenerationPayload>(
+  'incrementGeneration',
+);
 
 export const slice = createSlice({
   name: 'generation',
@@ -22,5 +29,5 @@ export const {reducer} = slice;
 
 export const selectGeneration = createSelector(
   (state: RootState) => state.generation,
-  (generation) => generation,
+  (generation: number) => generation,
 );

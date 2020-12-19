@@ -73,13 +73,17 @@ describe('section reducer', () => {
     });
   });
   it('should produce resources based on production count', () => {
+    const payload = {
+      energyResources: 0,
+      generation: 1,
+    };
     const plantsSlice = makeSlice({name: 'plants'});
     const nextState = plantsSlice.reducer(
       {
         production: 1,
         resources: 0,
       },
-      incrementGeneration(0),
+      incrementGeneration(payload),
     );
     expect(nextState).toEqual({
       production: 1,
@@ -93,7 +97,7 @@ describe('section reducer', () => {
     };
     const nextState = energySlice.reducer(
       state,
-      incrementGeneration(state.resources),
+      incrementGeneration({energyResources: state.resources, generation: 1}),
     );
     expect(nextState).toEqual({
       production: 1,
@@ -109,7 +113,7 @@ describe('section reducer', () => {
       .resources;
     const nextState = heatSlice.reducer(
       {production: 0, resources: 0},
-      incrementGeneration(energyResources),
+      incrementGeneration({energyResources, generation: 1}),
     );
     expect(nextState).toEqual({
       production: 0,

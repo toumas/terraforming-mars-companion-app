@@ -7,7 +7,7 @@ import {
   createSelector,
   PayloadAction,
 } from '@reduxjs/toolkit';
-import {incrementGeneration} from './generation';
+import {incrementGeneration, IncrementGenerationPayload} from './generation';
 import {RootState} from './store';
 
 export interface Section {
@@ -23,7 +23,10 @@ interface MakeSliceOptions {
   name: string;
   initialState?: Section;
   reducers?: ReducersMapObject;
-  extraReducers?: ReducersMapObject<any, PayloadAction<number>>;
+  extraReducers?: ReducersMapObject<
+    any,
+    PayloadAction<IncrementGenerationPayload>
+  >;
 }
 
 export const initialSectionState = {
@@ -82,9 +85,10 @@ export const heatSlice = makeSlice({
   extraReducers: {
     [incrementGeneration.type]: (
       state: Section,
-      action: PayloadAction<number>,
+      action: PayloadAction<IncrementGenerationPayload>,
     ) => {
-      state.resources = state.resources + state.production + action.payload;
+      state.resources =
+        state.resources + state.production + action.payload.energyResources;
     },
   },
 });
