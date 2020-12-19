@@ -21,7 +21,7 @@ export const {incrementTerraformRating} = slice.actions;
 
 export const selectTerraformRating = createSelector(
   (state: RootState) => {
-    const megaCreditsAndTerraformRatingState = state[
+    const megaCreditsAndTerraformRatingState = state.present[
       megaCreditsAndTerraformRating
     ] as MegaCreditsAndTerraformRatingState;
     return megaCreditsAndTerraformRatingState.terraformRating;

@@ -26,7 +26,7 @@ export function Section({name}: SectionProps) {
     incrementResources,
   } = actions[name];
   const {production, resources} = useSelector((state: RootState) => {
-    return state[name];
+    return state.present[name];
   });
 
   function handleProductionDecrement() {

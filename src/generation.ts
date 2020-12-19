@@ -25,9 +25,11 @@ export const slice = createSlice({
   },
 });
 
+// const reducer = undoable(slice.reducer);
+
 export const {reducer} = slice;
 
 export const selectGeneration = createSelector(
-  (state: RootState) => state.generation,
+  (state: RootState) => state.present.generation,
   (generation: number) => generation,
 );

@@ -114,7 +114,7 @@ export const actions: {[x: string]: ActionsBySectionName} = {
 
 export const selectEnergyResources = createSelector(
   (state: RootState) => {
-    return state.energy.resources;
+    return state.present.energy.resources;
   },
   (heatResources) => heatResources,
 );

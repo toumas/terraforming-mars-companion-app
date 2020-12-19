@@ -18,7 +18,8 @@
     "react-native-action-button": "^2.8.5",
     "react-native-svg": "^12.1.0",
     "react-redux": "^7.2.0",
-    "reduce-reducers": "^1.0.4"
+    "reduce-reducers": "^1.0.4",
+    "redux-undo": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

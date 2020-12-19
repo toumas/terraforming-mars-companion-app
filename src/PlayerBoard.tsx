@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Button} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import ActionButton from 'react-native-action-button';
 import {Section} from './Section';
@@ -14,6 +14,19 @@ import {
 import Globe from './globe.svg';
 import UserPlus from './user-plus.svg';
 import {name as megaCreditsAndTerraformRating} from './megaCreditsAndTerraformRating';
+import {ActionCreators} from 'redux-undo';
+
+const BottomScreen = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+  },
+  button: {
+    flexBasis: `${(5 / 12) * 100}%`,
+  },
+});
 
 export const PlayerBoard = () => {
   const dispatch = useDispatch();
@@ -29,6 +42,14 @@ export const PlayerBoard = () => {
     dispatch(incrementTerraformRating());
   }
 
+  function handleUndo() {
+    dispatch(ActionCreators.undo());
+  }
+
+  function handleRedo() {
+    dispatch(ActionCreators.redo());
+  }
+
   return (
     <>
       <View style={styles.globalsContainer}>
@@ -41,18 +62,29 @@ export const PlayerBoard = () => {
       <Section name={SectionNames.PLANTS} />
       <Section name={SectionNames.ENERGY} />
       <Section name={SectionNames.HEAT} />
+      <View style={BottomScreen.container}>
+        <View style={BottomScreen.button}>
+          <Button onPress={handleUndo} title="Undo" />
+        </View>
+        <View style={BottomScreen.button}>
+          <Button onPress={handleRedo} title="Redo" />
+        </View>
+      </View>
       <ActionButton
         buttonColor="#ff5252"
         renderIcon={() => <UserPlus />}
         degrees={0}
         onPress={handleIncrementGeneration}
-        offsetY={100}
+        offsetY={120}
+        elevation={4}
       />
       <ActionButton
         buttonColor="#ff5252"
         renderIcon={() => <Globe />}
         degrees={0}
         onPress={handleIncrementTerraformRating}
+        offsetY={50}
+        elevation={4}
       />
     </>
   );

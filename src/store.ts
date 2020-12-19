@@ -1,4 +1,5 @@
-import {configureStore} from '@reduxjs/toolkit';
+import undoable, {StateWithHistory} from 'redux-undo';
+import {CombinedState, combineReducers, configureStore} from '@reduxjs/toolkit';
 import {reducers, Section} from './section';
 import {reducer as generationReducer} from './generation';
 import {
@@ -7,17 +8,26 @@ import {
   reducer as megaCreditsAndTerraformRatingReducer,
 } from './megaCreditsAndTerraformRating';
 
-export type RootState = {
-  generation: number;
-  megaCreditsAndTerraformRating: MegaCreditsAndTerraformRatingState | undefined;
-} & {[key: string]: Section};
+export type RootState = StateWithHistory<
+  CombinedState<{
+    generation: number;
+    megaCreditsAndTerraformRating:
+      | MegaCreditsAndTerraformRatingState
+      | undefined;
+  }>
+> &
+  StateWithHistory<CombinedState<{[key: string]: Section}>>;
 
-const store = configureStore({
-  reducer: {
+const undoableRoot = undoable(
+  combineReducers({
     ...reducers,
     generation: generationReducer,
     [megaCreditsAndTerraformRating]: megaCreditsAndTerraformRatingReducer,
-  },
+  }),
+);
+
+const store = configureStore({
+  reducer: undoableRoot,
 });
 
 export {store};
