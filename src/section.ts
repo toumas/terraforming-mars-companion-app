@@ -1,3 +1,4 @@
+import { selectActiveGame } from './Games';
 import {SectionNames} from './SectionNames';
 import {
   createSlice,
@@ -118,3 +119,8 @@ export const selectEnergyResources = createSelector(
   },
   (heatResources) => heatResources,
 );
+
+export const selectSection = createSelector(
+  [selectActiveGame, (_state, {name}) => name],
+  (game, name) => game?.board.present[name]
+)

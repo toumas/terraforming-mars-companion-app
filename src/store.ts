@@ -7,6 +7,10 @@ import {
   name as megaCreditsAndTerraformRating,
   reducer as megaCreditsAndTerraformRatingReducer,
 } from './megaCreditsAndTerraformRating';
+import {reducer as gamesReducer} from './Games';
+import {reducer as activeGameIdReducer} from './activeGameId';
+import {reducer as boardsReducer} from './Board';
+import reduceReducers from 'reduce-reducers';
 
 export type RootState = StateWithHistory<
   CombinedState<{
@@ -18,7 +22,7 @@ export type RootState = StateWithHistory<
 > &
   StateWithHistory<CombinedState<{[key: string]: Section}>>;
 
-const undoableRoot = undoable(
+export const undoableRoot = undoable(
   combineReducers({
     ...reducers,
     generation: generationReducer,
@@ -26,8 +30,24 @@ const undoableRoot = undoable(
   }),
 );
 
+const board = combineReducers({
+  board: generationReducer,
+});
+
+const foo = reduceReducers(boardsReducer, generationReducer);
+
 const store = configureStore({
   reducer: undoableRoot,
+  // reducer: {
+  //   foo: undoableRoot,
+  //   games: gamesReducer,
+  //   boards: boardsReducer,
+  //   ...activeGameIdReducer,
+  // },
 });
+
+export function selectRootState(state) {
+  return state;
+}
 
 export {store};

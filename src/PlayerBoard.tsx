@@ -15,6 +15,10 @@ import Globe from './globe.svg';
 import UserPlus from './user-plus.svg';
 import {name as megaCreditsAndTerraformRating} from './megaCreditsAndTerraformRating';
 import {ActionCreators} from 'redux-undo';
+import {ScreenProps} from 'react-native-screens';
+import {Route, RouteProp} from '@react-navigation/native';
+import {selectById, selectActiveGame, Game} from './Games';
+// import {selectGeneration} from './Board';
 
 const BottomScreen = StyleSheet.create({
   container: {
@@ -28,7 +32,12 @@ const BottomScreen = StyleSheet.create({
   },
 });
 
-export const PlayerBoard = () => {
+type PlayerBoardRouteParams = {
+  id: string;
+  initialMegaCredits: number;
+};
+
+export const PlayerBoard = ({route: {params}}) => {
   const dispatch = useDispatch();
   const energyResources = useSelector(selectEnergyResources);
   const generation = useSelector(selectGeneration);

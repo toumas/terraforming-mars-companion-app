@@ -2,7 +2,11 @@ import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Dispatch} from '@reduxjs/toolkit';
 import {Text} from 'react-native';
-import {actions as sectionActions, ActionsBySectionName} from './section';
+import {
+  actions as sectionActions,
+  ActionsBySectionName,
+  selectSection,
+} from './section';
 import {RootState} from './store';
 import {actions as megaCreditsActions} from './megaCredits';
 import {OperationsInput} from './OperationsInput/OperationsInput';
